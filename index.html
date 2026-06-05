@@ -157,6 +157,23 @@ main{max-width:800px;margin:0 auto;padding:1.25rem 1rem 4rem}
 .study-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.6rem}.strategy{padding:.85rem;border:1px solid var(--border);border-radius:.75rem;background:var(--surface)}.strategy h4{font-size:.85rem;margin-bottom:.3rem}.strategy p{font-size:.76rem;color:var(--muted);line-height:1.6}
 .exam-note{background:var(--red-l);border:1.5px solid var(--red-m);color:var(--red);font-weight:800;border-radius:.8rem;padding:.8rem .9rem;font-size:.82rem;line-height:1.65;margin-bottom:.85rem}
 
+
+/* ═══ TYPING FLASHCARD MODE — 5번 정확 입력 ═══ */
+.type-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:1.25rem;box-shadow:var(--sh2);margin-top:.8rem}
+.type-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem;flex-wrap:wrap;margin-bottom:.85rem}
+.type-title{font-size:1rem;font-weight:900}.type-meta{font-family:var(--fm);font-size:.72rem;color:var(--light);margin-top:.25rem}
+.type-q{background:var(--surface);border:1px solid var(--border);border-radius:.85rem;padding:1rem;font-size:.95rem;line-height:1.75;margin:.8rem 0}
+.type-answer{display:none;background:var(--green-l);border:1px solid var(--green-m);color:var(--green);border-radius:.75rem;padding:.7rem .85rem;font-weight:800;font-family:var(--fm);margin-bottom:.75rem;word-break:keep-all}
+.type-answer.on{display:block}
+.type-input{width:100%;font-family:var(--fm);font-size:1rem;border:2px solid var(--border2);border-radius:.75rem;padding:.8rem .9rem;outline:none;transition:all .15s}
+.type-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.type-input.ok{border-color:var(--green);background:var(--green-l)}.type-input.ng{border-color:var(--red);background:var(--red-l)}
+.type-counts{display:grid;grid-template-columns:repeat(5,1fr);gap:.35rem;margin:.75rem 0}.type-dot{height:9px;border-radius:999px;background:var(--border)}.type-dot.on{background:var(--green)}
+.type-help{font-size:.76rem;color:var(--muted);line-height:1.65;margin-top:.55rem}.type-help b{color:var(--accent)}
+.type-actions{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.85rem}.type-actions .fcb{font-size:.78rem}
+.type-toast{min-height:1.3rem;font-size:.8rem;font-weight:800;margin-top:.55rem}.type-toast.good{color:var(--green)}.type-toast.bad{color:var(--red)}
+.type-done{display:none;background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:2rem;text-align:center;box-shadow:var(--sh2);margin-top:.8rem}.type-done.on{display:block}
+
 </style>
 </head>
 <body>
@@ -166,6 +183,7 @@ main{max-width:800px;margin:0 auto;padding:1.25rem 1rem 4rem}
     <button class="mt on" onclick="setMode('flash',this)">📚 플래시카드 학습</button>
     <button class="mt" onclick="setMode('quiz',this)">✏️ 퀴즈 채점</button>
     <button class="mt" onclick="setMode('study',this)">🎯 공부모드</button>
+    <button class="mt" onclick="setMode('typing',this)">⌨️ 타이핑 카드</button>
   </div>
 </header>
 <nav class="chnav">
@@ -259,6 +277,46 @@ main{max-width:800px;margin:0 auto;padding:1.25rem 1rem 4rem}
     <button class="smb" onclick="setStudy('strategy',this)"><strong>④ 만점 루틴</strong><small>시험 직전 순서</small></button>
   </div>
   <div class="study-panel" id="study-panel"></div>
+</main>
+</div>
+
+<!-- TYPING FLASHCARD PAGE -->
+<div id="pg-typing" class="pg">
+<main>
+  <div class="study-hero">
+    <div class="study-title">⌨️ <span>타이핑 플래시카드</span> — 정답 5번 입력하면 자동 다음</div>
+    <div class="study-desc">정답을 눈으로만 보지 않고 손으로 5번 찍어 넣는 모드예요. <b>정확히 맞으면 카운트가 올라가고</b>, 5칸이 차면 다음 카드로 자동 이동합니다.</div>
+  </div>
+  <div class="type-card" id="type-main">
+    <div class="type-top">
+      <div>
+        <div class="type-title" id="type-chname">5장 — 클래스와 객체</div>
+        <div class="type-meta" id="type-meta">1 / 1</div>
+      </div>
+      <div class="fc-btns">
+        <button class="fcb" onclick="typeShuffle()">🔀 셔플</button>
+        <button class="fcb" onclick="typeShowAnswer()">👀 정답보기</button>
+        <button class="fcb pri" onclick="typeRestart()">↺ 처음부터</button>
+      </div>
+    </div>
+    <div class="prog-bar"><div class="prog-fill" id="type-prog" style="width:0%"></div></div>
+    <div class="type-q" id="type-q"></div>
+    <div class="type-answer" id="type-answer"></div>
+    <input class="type-input" id="type-input" placeholder="정답을 그대로 입력하고 Enter!" autocomplete="off">
+    <div class="type-counts" id="type-counts"><span class="type-dot"></span><span class="type-dot"></span><span class="type-dot"></span><span class="type-dot"></span><span class="type-dot"></span></div>
+    <div class="type-toast" id="type-toast"></div>
+    <div class="type-help">✅ <b>Enter</b>: 입력 검사 · <b>정답 5회</b>: 자동 다음 · <b>→/←</b>: 카드 이동 · 답은 괄호 안 정답을 기준으로 채점!</div>
+    <div class="type-actions">
+      <button class="fcb" onclick="typePrev()">← 이전</button>
+      <button class="fcb" onclick="typeNext(true)">다음 →</button>
+    </div>
+  </div>
+  <div class="type-done" id="type-done">
+    <div class="done-icon">🎉</div>
+    <div class="done-title">타이핑 카드 완료!</div>
+    <div class="done-sub">손으로 5번씩 찍었으니까 기억에 훨씬 잘 남아요 ✨</div>
+    <button class="fcb pri" onclick="typeRestart()">↺ 다시 시작</button>
+  </div>
 </main>
 </div>
 
@@ -587,6 +645,7 @@ function setCh(n,el){
     s.style.display=(n===5||i===n)?'block':'none';
   });
   buildDeck(n);
+  typeBuildDeck();
   document.getElementById('respanel').classList.remove('on');
   document.getElementById('live-sc').textContent='—';
   shuffleAllOptions();
@@ -598,7 +657,9 @@ function setMode(m,el){
   document.getElementById('pg-flash').classList.toggle('on',m==='flash');
   document.getElementById('pg-quiz').classList.toggle('on',m==='quiz');
   document.getElementById('pg-study').classList.toggle('on',m==='study');
+  document.getElementById('pg-typing').classList.toggle('on',m==='typing');
   if(m==='study') renderStudy();
+  if(m==='typing') typeRender();
 }
 // ── QUIZ ──
 const ANS={
@@ -775,11 +836,12 @@ function shuffleAllOptions(){
     [...box.querySelectorAll('.mco')].forEach((o,i)=>{const n=o.querySelector('.onum'); if(n)n.textContent=NN[i];});
   });
 }
-
+\n\n// ── TYPING FLASHCARD MODE ──\nlet typeDeck=[], typeIdx=0, typeSuccess=0;\nfunction typeBuildDeck(){\n  typeDeck=[...CH_IDX[curCh]];\n  typeIdx=0;\n  typeSuccess=0;\n  if(document.getElementById('pg-typing')?.classList.contains('on')) typeRender();\n}\nfunction typeClean(html){\n  const d=document.createElement('div');\n  d.innerHTML=html;\n  return d.innerHTML;\n}\nfunction typeAnswerOf(card){\n  return (card?.a||'').replace(/&lt;/g,'<').replace(/&gt;/g,'>').trim();\n}\nfunction typeNorm(v){\n  return (v||'').trim().replace(/\s+/g,' ').toLowerCase();\n}\nfunction typeUpdateDots(){\n  document.querySelectorAll('#type-counts .type-dot').forEach((d,i)=>d.classList.toggle('on',i<typeSuccess));\n}\nfunction typeRender(){\n  const main=document.getElementById('type-main'), done=document.getElementById('type-done');\n  if(!main||!done) return;\n  if(!typeDeck.length) typeBuildDeck();\n  if(typeIdx>=typeDeck.length){main.style.display='none';done.classList.add('on');return;}\n  main.style.display='block';done.classList.remove('on');\n  const card=CARDS[typeDeck[typeIdx]];\n  document.getElementById('type-chname').textContent=CH_NAMES[curCh];\n  document.getElementById('type-meta').textContent=`${typeIdx+1} / ${typeDeck.length} · ${card.ch2} · ${card.tag}`;\n  document.getElementById('type-q').innerHTML=typeClean(card.q);\n  const ans=typeAnswerOf(card);\n  const ansBox=document.getElementById('type-answer');\n  ansBox.textContent='정답: '+ans; ansBox.classList.remove('on');\n  const inp=document.getElementById('type-input');\n  inp.value=''; inp.classList.remove('ok','ng');\n  document.getElementById('type-toast').textContent=''; document.getElementById('type-toast').className='type-toast';\n  typeSuccess=0; typeUpdateDots();\n  document.getElementById('type-prog').style.width=Math.round(typeIdx/typeDeck.length*100)+'%';\n  setTimeout(()=>inp.focus(),30);\n}\nfunction typeCheck(){\n  if(typeIdx>=typeDeck.length) return;\n  const card=CARDS[typeDeck[typeIdx]], ans=typeAnswerOf(card);\n  const inp=document.getElementById('type-input'), toast=document.getElementById('type-toast');\n  if(typeNorm(inp.value)===typeNorm(ans)){\n    typeSuccess++; inp.classList.add('ok'); inp.classList.remove('ng');\n    toast.textContent=`좋아! ${typeSuccess}/5 성공 ✨`; toast.className='type-toast good';\n    typeUpdateDots(); inp.value='';\n    if(typeSuccess>=5){\n      toast.textContent='5번 성공! 다음 카드로 넘어가요 🚀';\n      setTimeout(()=>typeNext(false),450);\n    }\n  }else{\n    inp.classList.add('ng'); inp.classList.remove('ok');\n    toast.textContent='한 글자라도 다르면 다시! 정답보기로 확인 가능해요 💪'; toast.className='type-toast bad';\n  }\n}\nfunction typeNext(manual){\n  if(typeIdx<typeDeck.length){typeIdx++; typeSuccess=0; typeRender();}\n}\nfunction typePrev(){\n  if(typeIdx>0){typeIdx--; typeSuccess=0; typeRender();}\n}\nfunction typeRestart(){typeBuildDeck(); typeRender();}\nfunction typeShuffle(){typeDeck.sort(()=>Math.random()-.5); typeIdx=0; typeSuccess=0; typeRender();}\nfunction typeShowAnswer(){document.getElementById('type-answer')?.classList.add('on'); document.getElementById('type-input')?.focus();}\ndocument.addEventListener('keydown',e=>{\n  if(!document.getElementById('pg-typing')?.classList.contains('on')) return;\n  if(e.key==='Enter'){e.preventDefault(); typeCheck();}\n  if(e.key==='ArrowRight') typeNext(true);\n  if(e.key==='ArrowLeft') typePrev();\n});\ndocument.addEventListener('input',e=>{\n  if(e.target?.id==='type-input') e.target.classList.remove('ok','ng');\n});\n
 prepareOptions();
 shuffleAllOptions();
 document.addEventListener('keydown',e=>{if(!document.getElementById('pg-flash').classList.contains('on'))return; if(e.code==='Space'){e.preventDefault();doFlip();} if(e.key==='ArrowRight')doNext(); if(e.key==='ArrowLeft')doPrev();});
 buildDeck(0);
+typeBuildDeck();
 </script>
 </body>
 </html>
