@@ -158,21 +158,30 @@ main{max-width:800px;margin:0 auto;padding:1.25rem 1rem 4rem}
 .exam-note{background:var(--red-l);border:1.5px solid var(--red-m);color:var(--red);font-weight:800;border-radius:.8rem;padding:.8rem .9rem;font-size:.82rem;line-height:1.65;margin-bottom:.85rem}
 
 
-/* ═══ TYPING FLASHCARD MODE — 5번 정확 입력 ═══ */
-.type-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:1.25rem;box-shadow:var(--sh2);margin-top:.8rem}
-.type-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem;flex-wrap:wrap;margin-bottom:.85rem}
-.type-title{font-size:1rem;font-weight:900}.type-meta{font-family:var(--fm);font-size:.72rem;color:var(--light);margin-top:.25rem}
-.type-q{background:var(--surface);border:1px solid var(--border);border-radius:.85rem;padding:1rem;font-size:.95rem;line-height:1.75;margin:.8rem 0}
-.type-answer{display:none;background:var(--green-l);border:1px solid var(--green-m);color:var(--green);border-radius:.75rem;padding:.7rem .85rem;font-weight:800;font-family:var(--fm);margin-bottom:.75rem;word-break:keep-all}
+/* ═══ TYPING 5 MODE ═══ */
+.type-box{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:1.2rem;box-shadow:var(--sh2);margin-top:1rem}
+.type-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem;flex-wrap:wrap;margin-bottom:.9rem}
+.type-title{font-size:1rem;font-weight:800;color:var(--text)}
+.type-meta{font-size:.72rem;color:var(--accent);background:var(--accent-l);border:1px solid var(--accent-m);padding:.22rem .6rem;border-radius:2rem;margin-top:.25rem;display:inline-block;font-family:var(--fm)}
+.type-actions{display:flex;gap:.4rem;flex-wrap:wrap}
+.type-card{border:1.5px solid var(--border);border-radius:12px;background:var(--surface);padding:1.25rem;margin-bottom:1rem}
+.type-q{font-size:.95rem;line-height:1.85;font-weight:500;margin-bottom:.9rem}
+.type-q .blank{display:inline-block;min-width:50px;background:var(--accent-m);border-radius:3px;padding:0 .25rem;color:transparent;border-bottom:2px solid var(--accent);margin:0 .1rem}
+.type-input{width:100%;font-family:var(--fm);font-size:1rem;padding:.75rem .9rem;border:2px solid var(--border2);border-radius:.7rem;outline:none;background:#fff;color:var(--text);transition:all .15s}
+.type-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.type-input.ok{border-color:var(--green);background:var(--green-l)}
+.type-input.ng{border-color:var(--red);background:var(--red-l)}
+.type-counts{display:flex;gap:.35rem;align-items:center;margin:.75rem 0 .45rem}
+.type-dot{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--light);font-family:var(--fm);font-weight:700;background:#fff}
+.type-dot.on{background:var(--green);border-color:var(--green);color:#fff}
+.type-toast{min-height:24px;font-size:.78rem;font-weight:700;margin-top:.35rem;color:var(--muted)}
+.type-toast.good{color:var(--green)}
+.type-toast.bad{color:var(--red)}
+.type-answer{display:none;margin-top:.7rem;padding:.65rem .85rem;border-radius:.55rem;background:var(--yellow-l);border:1px solid var(--yellow-m);font-family:var(--fm);font-size:.86rem;color:var(--yellow);font-weight:700;word-break:break-word}
 .type-answer.on{display:block}
-.type-input{width:100%;font-family:var(--fm);font-size:1rem;border:2px solid var(--border2);border-radius:.75rem;padding:.8rem .9rem;outline:none;transition:all .15s}
-.type-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
-.type-input.ok{border-color:var(--green);background:var(--green-l)}.type-input.ng{border-color:var(--red);background:var(--red-l)}
-.type-counts{display:grid;grid-template-columns:repeat(5,1fr);gap:.35rem;margin:.75rem 0}.type-dot{height:9px;border-radius:999px;background:var(--border)}.type-dot.on{background:var(--green)}
-.type-help{font-size:.76rem;color:var(--muted);line-height:1.65;margin-top:.55rem}.type-help b{color:var(--accent)}
-.type-actions{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.85rem}.type-actions .fcb{font-size:.78rem}
-.type-toast{min-height:1.3rem;font-size:.8rem;font-weight:800;margin-top:.55rem}.type-toast.good{color:var(--green)}.type-toast.bad{color:var(--red)}
-.type-done{display:none;background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:2rem;text-align:center;box-shadow:var(--sh2);margin-top:.8rem}.type-done.on{display:block}
+.type-nav{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap;margin-top:.85rem}
+.type-help{font-size:.72rem;color:var(--muted);line-height:1.5}
+.type-done{display:none}.type-done.on{display:block}
 
 </style>
 </head>
@@ -181,9 +190,9 @@ main{max-width:800px;margin:0 auto;padding:1.25rem 1rem 4rem}
   <div class="logo">☕ Java<span>완전정복</span></div>
   <div class="mode-tabs">
     <button class="mt on" onclick="setMode('flash',this)">📚 플래시카드 학습</button>
+    <button class="mt" onclick="setMode('typing',this)">⌨️ 타이핑 5회</button>
     <button class="mt" onclick="setMode('quiz',this)">✏️ 퀴즈 채점</button>
     <button class="mt" onclick="setMode('study',this)">🎯 공부모드</button>
-    <button class="mt" onclick="setMode('typing',this)">⌨️ 타이핑 카드</button>
   </div>
 </header>
 <nav class="chnav">
@@ -280,42 +289,49 @@ main{max-width:800px;margin:0 auto;padding:1.25rem 1rem 4rem}
 </main>
 </div>
 
-<!-- TYPING FLASHCARD PAGE -->
+
+<!-- TYPING PAGE -->
 <div id="pg-typing" class="pg">
 <main>
-  <div class="study-hero">
-    <div class="study-title">⌨️ <span>타이핑 플래시카드</span> — 정답 5번 입력하면 자동 다음</div>
-    <div class="study-desc">정답을 눈으로만 보지 않고 손으로 5번 찍어 넣는 모드예요. <b>정확히 맞으면 카운트가 올라가고</b>, 5칸이 차면 다음 카드로 자동 이동합니다.</div>
-  </div>
-  <div class="type-card" id="type-main">
-    <div class="type-top">
-      <div>
-        <div class="type-title" id="type-chname">5장 — 클래스와 객체</div>
-        <div class="type-meta" id="type-meta">1 / 1</div>
-      </div>
-      <div class="fc-btns">
-        <button class="fcb" onclick="typeShuffle()">🔀 셔플</button>
-        <button class="fcb" onclick="typeShowAnswer()">👀 정답보기</button>
-        <button class="fcb pri" onclick="typeRestart()">↺ 처음부터</button>
-      </div>
+  <div class="fc-hd">
+    <div>
+      <div class="fc-title" id="type-chname">5장 — 클래스와 객체</div>
+      <div class="fc-sub">정답을 5번 정확히 치면 자동 다음 카드</div>
     </div>
-    <div class="prog-bar"><div class="prog-fill" id="type-prog" style="width:0%"></div></div>
-    <div class="type-q" id="type-q"></div>
-    <div class="type-answer" id="type-answer"></div>
-    <input class="type-input" id="type-input" placeholder="정답을 그대로 입력하고 Enter!" autocomplete="off">
-    <div class="type-counts" id="type-counts"><span class="type-dot"></span><span class="type-dot"></span><span class="type-dot"></span><span class="type-dot"></span><span class="type-dot"></span></div>
-    <div class="type-toast" id="type-toast"></div>
-    <div class="type-help">✅ <b>Enter</b>: 입력 검사 · <b>정답 5회</b>: 자동 다음 · <b>→/←</b>: 카드 이동 · 답은 괄호 안 정답을 기준으로 채점!</div>
-    <div class="type-actions">
-      <button class="fcb" onclick="typePrev()">← 이전</button>
-      <button class="fcb" onclick="typeNext(true)">다음 →</button>
+    <div class="prog-wrap">
+      <div class="prog-bar"><div class="prog-fill" id="type-prog" style="width:0%"></div></div>
+      <div class="prog-txt" id="type-meta">1 / 1</div>
+    </div>
+    <div class="fc-btns">
+      <button class="fcb" onclick="typeShuffle()">🔀 셔플</button>
+      <button class="fcb pri" onclick="typeRestart()">↺ 처음부터</button>
     </div>
   </div>
-  <div class="type-done" id="type-done">
-    <div class="done-icon">🎉</div>
-    <div class="done-title">타이핑 카드 완료!</div>
-    <div class="done-sub">손으로 5번씩 찍었으니까 기억에 훨씬 잘 남아요 ✨</div>
-    <button class="fcb pri" onclick="typeRestart()">↺ 다시 시작</button>
+  <div id="type-main" class="type-box">
+    <div class="type-card">
+      <div class="cch" id="type-small"></div>
+      <div class="type-q" id="type-q"></div>
+      <input id="type-input" class="type-input" placeholder="정답을 그대로 입력하고 Enter!" autocomplete="off" spellcheck="false">
+      <div class="type-counts" id="type-counts">
+        <span class="type-dot">1</span><span class="type-dot">2</span><span class="type-dot">3</span><span class="type-dot">4</span><span class="type-dot">5</span>
+      </div>
+      <div id="type-toast" class="type-toast"></div>
+      <div id="type-answer" class="type-answer"></div>
+    </div>
+    <div class="type-nav">
+      <button class="narr" onclick="typePrev()">← 이전</button>
+      <div class="type-help">Enter 채점 · ← → 이동 · 정답은 띄어쓰기만 조금 유연하게 보고, 글자는 그대로 봐요</div>
+      <button class="narr" onclick="typeNext(true)">다음 →</button>
+      <button class="qzb" onclick="typeShowAnswer()">정답보기</button>
+    </div>
+  </div>
+  <div id="type-done" class="type-done">
+    <div class="done-card">
+      <div class="done-icon">⌨️</div>
+      <div class="done-title">타이핑 학습 완료!</div>
+      <div class="done-sub">5번씩 정확히 쳤으면 진짜 몸으로 외운 거야 ✨</div>
+      <button class="fcb pri" onclick="typeRestart()">↺ 다시 시작</button>
+    </div>
   </div>
 </main>
 </div>
@@ -539,42 +555,31 @@ const CARDS=[
 {ch:0,tag:'빈칸',ch2:'5.1—(14~15)',q:'변경값 반영 시 객체의 <span class="blank">　　</span>를 매개변수로 사용. 생성자 이름 = <span class="blank">　　</span> 이름, <span class="blank">　　</span> 없음, 주된 작업은 <span class="blank">　　</span>.',a:'참조 / 클래스 / 반환형 / 초기화',ex:'자바는 객체를 <strong>참조</strong>로 전달 → 메소드 내 변경이 외부에 반영. 생성자: 클래스명 동일, 반환형 없음, new 시 자동 호출, 필드 <strong>초기화</strong>가 주목적!'},
 {ch:0,tag:'빈칸',ch2:'5.1—(16~19)',q:'같은 클래스 내 다른 생성자 호출: <span class="blank">　　</span>. 객체 저장 장소: <span class="blank">　　</span>. 불필요한 객체 자동 회수: <span class="blank">　　</span>.',a:'this / 힙(heap) / 가비지 수집기',ex:'<strong>this()</strong>: 같은 클래스의 다른 생성자 호출(반드시 첫 줄). 객체는 모두 <strong>힙</strong>에 저장. <strong>가비지 컬렉터(GC)</strong>가 참조 없는 객체를 자동 제거!'},
 {ch:0,tag:'빈칸',ch2:'5.1—(20~25)',q:'클래스 내 정의된 클래스: <span class="blank">　　</span> or <span class="blank">　　</span>. 메소드 내 정의: <span class="blank">　　　　</span>. 이름없이 정의+생성: <span class="blank">　　</span>.',a:'중첩 클래스 / 내부 클래스 / 지역 중첩 클래스 / 익명 클래스',ex:'<strong>중첩(내부)</strong> 클래스: 클래스 안의 클래스. <strong>지역 중첩</strong>: 메소드 안. <strong>익명</strong>: 이름 없이 정의+생성 동시에! <code>new Runnable(){...}</code>'},
-{ch:0,tag:'객관식',ch2:'5.2—(1)(2)',q:'클래스 → ? / 접근 수정자 → ?
-①자료추상화 ②상속성 ③다형성 ④재사용성 ⑤정보은닉화',a:'클래스→① 자료추상화 / 접근수정자→⑤ 정보은닉화',ex:'<strong>클래스</strong> = 자료 추상화(데이터+연산을 자료형처럼). <strong>접근 수정자(private 등)</strong> = 정보 은닉화(내부 구현 숨김)!'},
-{ch:0,tag:'객관식',ch2:'5.2—(3)(4)',q:'접근 지정어 아닌 것? / 필드 자격자는?
-③package ⑤final / ①volatile',a:'③package⑤final / ①volatile',ex:'접근 지정어 아닌 것: <strong>package</strong>(자바에 없음), <strong>final</strong>(변경불가 지정어). 필드 자격자: <strong>volatile</strong>만! synchronized/native/abstract는 메소드용.'},
-{ch:0,tag:'객관식',ch2:'5.2—(6)',q:'접근 수준 틀린 것은?
-② package로 선언된 필드는 서브클래스에서 인식된다.',a:'② package 선언은 존재하지 않음!',ex:'자바에 <strong>"package" 접근 지정어는 없다!</strong> 아무 지정어 없는 것이 "default(package-private)"이며, 다른 패키지의 서브클래스에서는 접근 불가.'},
-{ch:0,tag:'객관식',ch2:'5.2—(7)(8)',q:'main() 매개변수 자료형? / 시그니처 해당 안되는 것?
-③String / ④반환형 ⑤매개변수이름',a:'③ String / ④반환형 ⑤매개변수이름',ex:'main = <code>public static void main(<strong>String[]</strong> args)</code>. 시그니처 = 이름+개수+형. <strong>반환형, 매개변수 이름은 시그니처에 없다!</strong> (오버로딩 구별 불가)'},
-{ch:0,tag:'객관식',ch2:'5.2—(9)(10)',q:'간접 호출 아닌 것? / 실행 순서?
-⑤start() / ①정적초기화→초기화→생성자',a:'⑤ start() 직접호출 / ① 정적→초기화→생성자',ex:'<strong>start()</strong>는 프로그래머가 직접 호출! run/toString/finalize/생성자는 시스템이 간접 호출. 실행 순서: <strong>정적 초기화문 → 초기화문 → 생성자</strong> 무조건 암기!'},
+{ch:0,tag:'객관식',ch2:'5.2—(1)(2)',q:'클래스 → ? / 접근 수정자 → ?\n①자료추상화 ②상속성 ③다형성 ④재사용성 ⑤정보은닉화',a:'클래스→① 자료추상화 / 접근수정자→⑤ 정보은닉화',ex:'<strong>클래스</strong> = 자료 추상화(데이터+연산을 자료형처럼). <strong>접근 수정자(private 등)</strong> = 정보 은닉화(내부 구현 숨김)!'},
+{ch:0,tag:'객관식',ch2:'5.2—(3)(4)',q:'접근 지정어 아닌 것? / 필드 자격자는?\n③package ⑤final / ①volatile',a:'③package⑤final / ①volatile',ex:'접근 지정어 아닌 것: <strong>package</strong>(자바에 없음), <strong>final</strong>(변경불가 지정어). 필드 자격자: <strong>volatile</strong>만! synchronized/native/abstract는 메소드용.'},
+{ch:0,tag:'객관식',ch2:'5.2—(6)',q:'접근 수준 틀린 것은?\n② package로 선언된 필드는 서브클래스에서 인식된다.',a:'② package 선언은 존재하지 않음!',ex:'자바에 <strong>"package" 접근 지정어는 없다!</strong> 아무 지정어 없는 것이 "default(package-private)"이며, 다른 패키지의 서브클래스에서는 접근 불가.'},
+{ch:0,tag:'객관식',ch2:'5.2—(7)(8)',q:'main() 매개변수 자료형? / 시그니처 해당 안되는 것?\n③String / ④반환형 ⑤매개변수이름',a:'③ String / ④반환형 ⑤매개변수이름',ex:'main = <code>public static void main(<strong>String[]</strong> args)</code>. 시그니처 = 이름+개수+형. <strong>반환형, 매개변수 이름은 시그니처에 없다!</strong> (오버로딩 구별 불가)'},
+{ch:0,tag:'객관식',ch2:'5.2—(9)(10)',q:'간접 호출 아닌 것? / 실행 순서?\n⑤start() / ①정적초기화→초기화→생성자',a:'⑤ start() 직접호출 / ① 정적→초기화→생성자',ex:'<strong>start()</strong>는 프로그래머가 직접 호출! run/toString/finalize/생성자는 시스템이 간접 호출. 실행 순서: <strong>정적 초기화문 → 초기화문 → 생성자</strong> 무조건 암기!'},
 {ch:1,tag:'빈칸',ch2:'6.1—(1~3)',q:'상속의 장점: <span class="blank">　　</span>. 기존 클래스: <span class="blank">　　</span>, 새 클래스: <span class="blank">　　</span>. 루트 클래스: <span class="blank">　　</span>.',a:'재사용성 / 슈퍼클래스 / 서브클래스 / Object',ex:'상속 = <strong>재사용성</strong>! 부모 = <strong>슈퍼클래스</strong>, 자식 = <strong>서브클래스</strong>. 최상위 루트는 <strong>Object</strong> — 자바의 모든 클래스는 자동으로 Object를 상속!'},
 {ch:1,tag:'빈칸',ch2:'6.1—(6~9)',q:'시그니처 다르면 <span class="blank">　　</span>, 같으면 <span class="blank">　　</span>. 슈퍼 생성자 호출: <span class="blank">　　</span>. 상속 안되는 것: <span class="blank">　　</span>. 재정의 불가: <span class="blank">　　</span>/<span class="blank">　　</span> 메소드.',a:'중복 / 재정의 / super() / 생성자 / 정적 / 최종(final)',ex:'시그니처 다름=<strong>오버로딩</strong>, 같음=<strong>오버라이딩</strong>. <strong>생성자는 상속 안됨!</strong> <strong>static/final 메소드는 재정의 불가!</strong> 슈퍼 생성자는 super()로 호출.'},
 {ch:1,tag:'빈칸',ch2:'6.1—(11~15)',q:'인터페이스 필드: public, static, <span class="blank">　　</span>. 메소드: <span class="blank">　　</span>, public. 인터페이스→인터페이스: <span class="blank">　　</span>. 클래스 구현: <span class="blank">　　</span>.',a:'final / abstract / extends / implements',ex:'인터페이스 필드 = 자동으로 <strong>public static final</strong>. 메소드 = 자동으로 <strong>public abstract</strong>. 상속: <strong>extends</strong>, 구현: <strong>implements</strong>. 4개 암기!'},
 {ch:1,tag:'빈칸',ch2:'6.1—(17~24)',q:'인터페이스/추상 클래스는 <span class="blank">　　</span> 불가. 인터페이스 다중상속을 <span class="blank">　　</span>이라 함. 슈퍼→서브 변환 시: <span class="blank">　　</span>. 객체별 다른 의미: <span class="blank">　　</span>.',a:'객체 생성 / 다중상속 / 캐스트 연산자 / 다형성',ex:'추상클래스·인터페이스 = <strong>객체 생성 불가!</strong> 인터페이스만 <strong>다중상속</strong> OK. 슈퍼→서브 변환은 <strong>캐스트 연산자</strong> 필수. 객체마다 다른 메소드 의미 = <strong>다형성</strong>!'},
-{ch:1,tag:'객관식',ch2:'6.2—(2)(3)',q:'상속 안되는 것? / 상속의 가장 큰 장점?
-②생성자 / ⑤재사용성',a:'② 생성자 상속 안됨 / ⑤ 재사용성',ex:'<strong>생성자는 상속 안됨!</strong> super()로 명시 호출해야 함. 상속의 최대 장점은 <strong>재사용성</strong> — 기존 코드를 그대로 활용해 새 클래스 생성!'},
+{ch:1,tag:'객관식',ch2:'6.2—(2)(3)',q:'상속 안되는 것? / 상속의 가장 큰 장점?\n②생성자 / ⑤재사용성',a:'② 생성자 상속 안됨 / ⑤ 재사용성',ex:'<strong>생성자는 상속 안됨!</strong> super()로 명시 호출해야 함. 상속의 최대 장점은 <strong>재사용성</strong> — 기존 코드를 그대로 활용해 새 클래스 생성!'},
 {ch:1,tag:'객관식',ch2:'6.2—(5)(7)',q:'SubClass extends SuperClass 필드/메소드 개수? / 서브클래스 생성자 순서?',a:'④ 필드2개 메소드2개 / ① 필드초기화→슈퍼생성자→생성자몸체',ex:'상속받은 것도 포함! 필드2(자기+상속), 메소드2. 생성자 순서: <strong>①필드 초기화 → ②슈퍼클래스 생성자 → ③생성자 몸체</strong>. 슈퍼가 몸체보다 먼저!'},
 {ch:1,tag:'객관식',ch2:'6.2—(8)(10)',q:'재정의 가능한 메소드? / 인터페이스를 제공하는 이유?',a:'② 추상 ④ 네이티브 ⑤ 인스턴스 / ③ 클래스가 다중 상속이 안 되기 때문',ex:'재정의 불가: <strong>①정적, ③최종(final)</strong>. 나머지 가능. 인터페이스 이유: 자바 클래스는 <strong>단일 상속만!</strong> 다중 상속 효과를 인터페이스로 해결.'},
 {ch:1,tag:'객관식',ch2:'6.2—(17)(19)',q:'다이아몬드 상속 틀린 것? / 인터페이스 vs 추상클래스 맞는 것?',a:'③ (클래스를 implements 다중 불가) / ① 인터페이스 다중상속O 추상클래스 단일상속만',ex:'클래스 Z가 클래스 X, Y를 동시에 implements 불가(클래스는 extends 하나만). 인터페이스 = <strong>다중상속 O</strong>. 추상클래스 = <strong>단일상속만</strong>. 둘 다 객체 생성 불가!'},
 {ch:2,tag:'빈칸',ch2:'9.1—(1~5)',q:'예외 처리: <span class="blank">　　　</span> 작성. 시스템 발생: <span class="blank">　　　</span>. 직접 발생: <span class="blank">　　　</span>. 처리 구문: <span class="blank">　　　</span>.',a:'예외 처리기 / 시스템 정의 예외 / 프로그래머 정의 예외 / try-catch-finally',ex:'예외 2분류: <strong>시스템 정의</strong>(JVM 자동, ex: NPE) vs <strong>프로그래머 정의</strong>(throw로 직접). 처리 구문: <strong>try-catch-finally</strong> — try(위험), catch(처리), finally(항상 실행)!'},
 {ch:2,tag:'빈칸',ch2:'9.1—(6~9)',q:'처리 안하면: <span class="blank">　　　</span>. 예외를 메소드 밖으로 넘기는 것: <span class="blank">　　</span>. 선언 방법: <span class="blank">　　</span> 절.',a:'디폴트 예외 처리기 / 전파 / throws',ex:'처리 안하면 <strong>디폴트 예외 처리기</strong>가 프로그램 종료. <strong>전파</strong>: 호출자에게 처리 위임 → 코드 집중화. <strong>throws</strong>: 메소드 헤더에 "이 예외 나 안 처리해"를 선언!'},
 {ch:2,tag:'빈칸',ch2:'9.1—(11~13)',q:'프로그램의 올바른 실행 조건 선언: <span class="blank">　　</span>. JVM 검사 여부: <span class="blank">　　</span>으로 준다.',a:'단정 / 옵션',ex:'<strong>단정(assert)</strong>: 프로그램이 반드시 만족해야 할 조건 명시. <code>assert 조건식;</code> 또는 <code>assert 조건식 : "메시지";</code>. JVM <strong>-ea 옵션</strong>으로 활성화!'},
-{ch:2,tag:'객관식',ch2:'9.2—(1)',q:'예외 설명 중 틀린 것?
-③ IndexOutOfBoundsException은 프로그래머 정의 예외이다.',a:'③ 시스템 정의 예외임!',ex:'IndexOutOfBoundsException, ArrayStoreException은 <strong>JVM이 자동 발생시키는 시스템 정의 예외</strong>! 프로그래머 정의 예외는 사용자가 Exception을 상속해서 직접 만드는 것.'},
-{ch:2,tag:'객관식',ch2:'9.2—(3)(4)',q:'Exception의 슈퍼클래스? / 예외 인위적으로 발생 지정어?
-②Throwable / ①throw',a:'② Throwable / ① throw',ex:'계층: <strong>Throwable</strong> → Error / Exception → RuntimeException(unchecked) / 기타(checked). <strong>throw</strong>로 직접 발생(던지기), <strong>throws</strong>는 전파 선언(다름!).'},
-{ch:2,tag:'객관식',ch2:'9.2—(5)(6)',q:'CheckedException? / 표준 검사된 예외?
-③UserException / ④InterruptedException',a:'③ UserException (Checked) / ④ InterruptedException (표준 Checked)',ex:'<strong>Checked</strong>(컴파일러 강제 처리): IOException, InterruptedException, 사용자정의. <strong>Unchecked</strong>(RuntimeException 하위): NullPointerException, ArrayStoreException 등.'},
-{ch:2,tag:'객관식',ch2:'9.2—(8)(9)',q:'단정 거짓 → 발생 예외? / 맞는 설명?
-⑤AssertionError / ②조건식이어야 한다',a:'⑤ AssertionError / ② 반드시 조건식',ex:'단정 거짓이면 <strong>AssertionError</strong> 발생(Exception이 아닌 Error!). 단정의 식은 반드시 <strong>boolean 조건식</strong>이어야 하고, JVM 옵션으로 검사 on/off 가능.'},
+{ch:2,tag:'객관식',ch2:'9.2—(1)',q:'예외 설명 중 틀린 것?\n③ IndexOutOfBoundsException은 프로그래머 정의 예외이다.',a:'③ 시스템 정의 예외임!',ex:'IndexOutOfBoundsException, ArrayStoreException은 <strong>JVM이 자동 발생시키는 시스템 정의 예외</strong>! 프로그래머 정의 예외는 사용자가 Exception을 상속해서 직접 만드는 것.'},
+{ch:2,tag:'객관식',ch2:'9.2—(3)(4)',q:'Exception의 슈퍼클래스? / 예외 인위적으로 발생 지정어?\n②Throwable / ①throw',a:'② Throwable / ① throw',ex:'계층: <strong>Throwable</strong> → Error / Exception → RuntimeException(unchecked) / 기타(checked). <strong>throw</strong>로 직접 발생(던지기), <strong>throws</strong>는 전파 선언(다름!).'},
+{ch:2,tag:'객관식',ch2:'9.2—(5)(6)',q:'CheckedException? / 표준 검사된 예외?\n③UserException / ④InterruptedException',a:'③ UserException (Checked) / ④ InterruptedException (표준 Checked)',ex:'<strong>Checked</strong>(컴파일러 강제 처리): IOException, InterruptedException, 사용자정의. <strong>Unchecked</strong>(RuntimeException 하위): NullPointerException, ArrayStoreException 등.'},
+{ch:2,tag:'객관식',ch2:'9.2—(8)(9)',q:'단정 거짓 → 발생 예외? / 맞는 설명?\n⑤AssertionError / ②조건식이어야 한다',a:'⑤ AssertionError / ② 반드시 조건식',ex:'단정 거짓이면 <strong>AssertionError</strong> 발생(Exception이 아닌 Error!). 단정의 식은 반드시 <strong>boolean 조건식</strong>이어야 하고, JVM 옵션으로 검사 on/off 가능.'},
 {ch:3,tag:'빈칸',ch2:'10.1—(1~5)',q:'제네릭 단위: 클래스, <span class="blank">　　</span>, 메소드. 형 검사: <span class="blank">　　</span>에. 이전 방식: <span class="blank">　　</span>. 형 매개변수는 <span class="blank">　</span>와 <span class="blank">　</span> 사이.',a:'인터페이스 / 컴파일 시간 / 로우형 / < / >',ex:'제네릭: 자료형을 나중에 지정. 형 검사 = <strong>컴파일 시간</strong>(런타임 오류 방지). <strong>로우형</strong>: 제네릭 없던 시절 방식. 형 매개변수는 <strong>&lt;T&gt;</strong> 형태로 사용!'},
 {ch:3,tag:'빈칸',ch2:'10.1—(6~9)',q:'제네릭 메소드 정의: <span class="blank">　　</span>와 반환형 사이에 형 매개변수 삽입. 제한 이유: 프로그램의 <span class="blank">　　</span>.',a:'메소드 수정자 / 신뢰성',ex:'<code>public <strong>&lt;T&gt;</strong> void method(T t)</code> — 수정자(public)와 반환형(void) 사이에 &lt;T&gt;! 클래스 제네릭은 클래스명 뒤. 제한 이유 = <strong>신뢰성</strong>(잘못된 타입 차단).'},
 {ch:3,tag:'빈칸',ch2:'10.1—(10~13)',q:'어노테이션: <span class="blank">　　</span>를 제공. <span class="blank">　　</span> 기호 사용. 종류: <span class="blank">　　</span>/<span class="blank">　　</span>/<span class="blank">　　</span>.',a:'추가 정보 / @ / 마커 어노테이션 / 단원소 어노테이션 / 일반 어노테이션',ex:'<strong>어노테이션</strong> = 코드에 메타데이터 부착. @Override, @Deprecated 등. 마커(원소없음), 단원소(1개), 일반(여러개). JDK의 <strong>APT</strong>로 처리.'},
 {ch:3,tag:'빈칸',ch2:'10.1—(14~17)',q:'사라질 수 있다고 경고: <span class="blank">　　</span>. ElementType 상수: <span class="blank">　　</span>개. 기본 RetentionPolicy: <span class="blank">　　</span>.',a:'Deprecated / 8 / RetentionPolicy.CLASS',ex:'<strong>@Deprecated</strong>: 쓰지마 경고. RetentionPolicy: <strong>SOURCE</strong>(컴파일 전 삭제) / <strong>CLASS</strong>(기본, 클래스파일) / <strong>RUNTIME</strong>(실행시 유지). ElementType = 8개(TYPE,METHOD,FIELD 등).'},
-{ch:3,tag:'객관식',ch2:'10.2—(1)',q:'제네릭 옳지 않은 것?
-④ 형 매개변수를 정의할 때 super 키워드를 사용하여 제한할 수 있다.',a:'④ extends만 가능, super는 불가!',ex:'타입 상한 제한: <code>&lt;T <strong>extends</strong> Number&gt;</code>만 OK. <strong>super</strong>는 와일드카드에서 하한 제한(<code>&lt;? super Integer&gt;</code>)에만 사용. 형 매개변수 정의에는 사용 불가!'},
+{ch:3,tag:'객관식',ch2:'10.2—(1)',q:'제네릭 옳지 않은 것?\n④ 형 매개변수를 정의할 때 super 키워드를 사용하여 제한할 수 있다.',a:'④ extends만 가능, super는 불가!',ex:'타입 상한 제한: <code>&lt;T <strong>extends</strong> Number&gt;</code>만 OK. <strong>super</strong>는 와일드카드에서 하한 제한(<code>&lt;? super Integer&gt;</code>)에만 사용. 형 매개변수 정의에는 사용 불가!'},
 {ch:3,tag:'객관식',ch2:'10.2—(3)(4)(5)',q:'G<T extends Number>에서 불가? / G<?>와 같은것? / 제네릭 메소드 형태?',a:'② Boolean / ⑤ G<? extends Object> / ① public <T> void genericMethod(T arg)',ex:'Boolean은 Number 상속 안함 → 불가. G&lt;?&gt; = 모든 타입 = <strong>G&lt;? extends Object&gt;</strong>. 제네릭 메소드: <strong>public &lt;T&gt; void method(T arg)</strong> — 접근자 다음, 반환형 앞에 &lt;T&gt;!'},
 {ch:3,tag:'객관식',ch2:'10.2—(9)(10)',q:'ElementType의 상수 아닌 것? / RetentionPolicy의 상수 아닌 것?',a:'① CLASS (TYPE이 맞음) / ③ INTERFACE ⑤ PACKAGE',ex:'<strong>ElementType</strong>: TYPE(클래스), METHOD, FIELD, PACKAGE, PARAMETER 등 8개. <strong>CLASS가 아니라 TYPE!</strong> RetentionPolicy: SOURCE, CLASS, RUNTIME 딱 3개만!'},
 {ch:4,tag:'빈칸',ch2:'11.1—(1~3)',q:'한 프로세스에 스레드 여러 개: <span class="blank">　　</span>. 스레드 생성: <span class="blank">　　</span> 확장 or <span class="blank">　　</span> 구현.',a:'멀티스레딩 / Thread 클래스 / Runnable 인터페이스',ex:'<strong>멀티스레딩</strong>: 하나의 프로세스에서 여러 작업 동시 수행. 스레드 생성 방법 2가지: ①Thread extends ②Runnable implements. 다중상속 불가 때문에 둘 다 제공!'},
@@ -582,10 +587,8 @@ const CARDS=[
 {ch:4,tag:'빈칸',ch2:'11.1—(6~9)',q:'Not Runnable→Runnable 메소드: <span class="blank">　　</span>/<span class="blank">　　</span>. 실행 순서 제어: <span class="blank">　　</span>. 동기화 병렬성 저하 → <span class="blank">　　</span> 문장으로 해결.',a:'notify() / notifyAll() / 스케줄러 / 동기화',ex:'<strong>notify()</strong>: 대기 스레드 하나 깨움. <strong>notifyAll()</strong>: 전부 깨움. <strong>스케줄러</strong>: Runnable 중 실행 순서 결정. 동기화 메소드는 전체 lock → 병렬성↓ → <strong>동기화 문장</strong>으로 범위 축소!'},
 {ch:4,tag:'빈칸',ch2:'11.1—(10~12)',q:'데드락 원인: <span class="blank">　　</span>. 영원히 기다리는 상태: <span class="blank">　　</span>. 여러 스레드 묶음: <span class="blank">　　</span>.',a:'환형 의존 / 데드락(deadlock) / 스레드 그룹',ex:'<strong>데드락</strong>: A가 X잡고 Y기다리고, B가 Y잡고 X기다리는 상태. 원인 = <strong>환형 의존</strong>. <strong>스레드 그룹</strong>: 여러 스레드를 하나의 객체로 묶어 일괄 관리!'},
 {ch:4,tag:'객관식',ch2:'11.2—(1)(5)',q:'멀티스레딩 공유 항목? / 두 가지 생성 방법 이유?',a:'⑤ 힙·공유데이터·실행코드 / ⑤ 클래스가 다중 상속 지원 안하기 때문',ex:'스레드 <strong>공유</strong>: 힙, 공유데이터, 실행코드. <strong>각자 소유</strong>: 스택(지역변수/메소드 호출). Runnable 제공 이유: Thread extends하면 다른 클래스 못 상속 → <strong>다중상속 불가!</strong>'},
-{ch:4,tag:'객관식',ch2:'11.2—(6)(7)',q:'Not Runnable 전이 아닌 것? / 실행 멈추지 않는 경우?
-③yield() / ④notify 받은 경우',a:'③ yield() — Runnable→Runnable / ④ notify 받음은 멈추지 않음',ex:'<strong>yield()</strong>: 다른 스레드에 양보, 하지만 <strong>Not Runnable이 아님</strong>! 바로 다시 Runnable. <strong>notify 받음</strong>: Not Runnable → Runnable로 가는 것, 실행 중 스레드는 안 멈춤!'},
-{ch:4,tag:'객관식',ch2:'11.2—(9)(10)',q:'생산자/소비자 고려 아닌 것? / 스레드 그룹 틀린 것?
-⑤동일시점갱신 / ⑤그룹안에그룹불가',a:'⑤ 동일 시점 갱신은 금물! / ⑤ 그룹 안에 그룹 가능(트리 구조)!',ex:'생산자/소비자: 동시 갱신 금지 — 순서 지켜야! <strong>스레드 그룹 안에 스레드 그룹 가능</strong>(트리 구조). main 그룹 → system 그룹 하위.'}
+{ch:4,tag:'객관식',ch2:'11.2—(6)(7)',q:'Not Runnable 전이 아닌 것? / 실행 멈추지 않는 경우?\n③yield() / ④notify 받은 경우',a:'③ yield() — Runnable→Runnable / ④ notify 받음은 멈추지 않음',ex:'<strong>yield()</strong>: 다른 스레드에 양보, 하지만 <strong>Not Runnable이 아님</strong>! 바로 다시 Runnable. <strong>notify 받음</strong>: Not Runnable → Runnable로 가는 것, 실행 중 스레드는 안 멈춤!'},
+{ch:4,tag:'객관식',ch2:'11.2—(9)(10)',q:'생산자/소비자 고려 아닌 것? / 스레드 그룹 틀린 것?\n⑤동일시점갱신 / ⑤그룹안에그룹불가',a:'⑤ 동일 시점 갱신은 금물! / ⑤ 그룹 안에 그룹 가능(트리 구조)!',ex:'생산자/소비자: 동시 갱신 금지 — 순서 지켜야! <strong>스레드 그룹 안에 스레드 그룹 가능</strong>(트리 구조). main 그룹 → system 그룹 하위.'}
 ];
 CARDS.forEach((c,i)=>c.idx=i);
 const CH_IDX=[
@@ -658,7 +661,7 @@ function setCh(n,el){
     s.style.display=(n===5||i===n)?'block':'none';
   });
   buildDeck(n);
-  typeBuildDeck();
+  if(typeof typeBuildDeck==='function') typeBuildDeck();
   document.getElementById('respanel').classList.remove('on');
   document.getElementById('live-sc').textContent='—';
   shuffleAllOptions();
@@ -668,12 +671,167 @@ function setMode(m,el){
   document.querySelectorAll('.mt').forEach(t=>t.classList.remove('on'));
   el.classList.add('on');
   document.getElementById('pg-flash').classList.toggle('on',m==='flash');
-  document.getElementById('pg-quiz').classList.toggle('on',m==='quiz');
-  document.getElementById('pg-study').classList.toggle('on',m==='study');
   document.getElementById('pg-typing').classList.toggle('on',m==='typing');
-  if(m==='study') renderStudy();
+  document.getElementById('pg-quiz').classList.toggle('on',m==='quiz');
   if(m==='typing') typeRender();
+  document.getElementById('pg-study').classList.toggle('on',m==='study');
+  if(m==='study') renderStudy();
 }
+
+// ── TYPING FLASHCARD MODE ──
+let typeDeck = [];
+let typeIdx = 0;
+let typeSuccess = 0;
+function typeBuildDeck(){
+  typeDeck = [...CH_IDX[curCh]];
+  typeIdx = 0;
+  typeSuccess = 0;
+}
+function typeAnswerOf(card){
+  return String(card && card.a ? card.a : '').replace(/&lt;/g,'<').replace(/&gt;/g,'>').trim();
+}
+function typeNorm(v){
+  return String(v || '').trim().replace(/\s+/g,' ').toLowerCase();
+}
+function typeUpdateDots(){
+  document.querySelectorAll('#type-counts .type-dot').forEach(function(dot,i){
+    dot.classList.toggle('on', i < typeSuccess);
+  });
+}
+function typeRender(){
+  const main = document.getElementById('type-main');
+  const done = document.getElementById('type-done');
+  if(!main || !done) return;
+  if(!typeDeck.length) typeBuildDeck();
+  if(typeIdx >= typeDeck.length){
+    main.style.display = 'none';
+    done.classList.add('on');
+    document.getElementById('type-prog').style.width = '100%';
+    return;
+  }
+  main.style.display = 'block';
+  done.classList.remove('on');
+  const card = CARDS[typeDeck[typeIdx]];
+  document.getElementById('type-chname').textContent = CH_NAMES[curCh];
+  document.getElementById('type-meta').textContent = (typeIdx+1) + ' / ' + typeDeck.length + ' · ' + card.ch2 + ' · ' + card.tag;
+  document.getElementById('type-small').textContent = card.ch2;
+  document.getElementById('type-q').innerHTML = card.q;
+  const ans = typeAnswerOf(card);
+  const ansBox = document.getElementById('type-answer');
+  ansBox.textContent = '정답: ' + ans;
+  ansBox.classList.remove('on');
+  const inp = document.getElementById('type-input');
+  inp.value = '';
+  inp.classList.remove('ok','ng');
+  document.getElementById('type-toast').textContent = '';
+  document.getElementById('type-toast').className = 'type-toast';
+  typeSuccess = 0;
+  typeUpdateDots();
+  document.getElementById('type-prog').style.width = Math.round(typeIdx/typeDeck.length*100) + '%';
+  setTimeout(function(){ inp.focus(); }, 30);
+}
+function typeCheck(){
+  if(typeIdx >= typeDeck.length) return;
+  const card = CARDS[typeDeck[typeIdx]];
+  const ans = typeAnswerOf(card);
+  const inp = document.getElementById('type-input');
+  const toast = document.getElementById('type-toast');
+  if(typeNorm(inp.value) === typeNorm(ans)){
+    typeSuccess += 1;
+    inp.classList.add('ok');
+    inp.classList.remove('ng');
+    toast.textContent = '좋아! ' + typeSuccess + '/5 성공 ✨';
+    toast.className = 'type-toast good';
+    typeUpdateDots();
+    inp.value = '';
+    if(typeSuccess >= 5){
+      toast.textContent = '5번 성공! 다음 카드로 넘어가요 🚀';
+      setTimeout(function(){ typeNext(false); }, 450);
+    }
+  }else{
+    inp.classList.add('ng');
+    inp.classList.remove('ok');
+    toast.textContent = '한 글자라도 다르면 다시! 정답보기로 확인 가능해요 💪';
+    toast.className = 'type-toast bad';
+  }
+}
+function typeNext(manual){
+  if(typeIdx < typeDeck.length){
+    typeIdx += 1;
+    typeSuccess = 0;
+    typeRender();
+  }
+}
+function typePrev(){
+  if(typeIdx > 0){
+    typeIdx -= 1;
+    typeSuccess = 0;
+    typeRender();
+  }
+}
+function typeRestart(){
+  typeBuildDeck();
+  typeRender();
+}
+function typeShuffle(){
+  if(!typeDeck.length) typeBuildDeck();
+  typeDeck.sort(function(){ return Math.random() - 0.5; });
+  typeIdx = 0;
+  typeSuccess = 0;
+  typeRender();
+}
+function typeShowAnswer(){
+  const ans = document.getElementById('type-answer');
+  if(ans) ans.classList.add('on');
+  const inp = document.getElementById('type-input');
+  if(inp) inp.focus();
+}
+document.addEventListener('keydown', function(e){
+  const typingPage = document.getElementById('pg-typing');
+  if(!typingPage || !typingPage.classList.contains('on')) return;
+
+  const active = document.activeElement;
+  const isTypingInput = active && active.id === 'type-input';
+
+  // 타이핑 입력박스 안에서는 ← → 를 카드 이동이 아니라 커서 이동으로 사용
+  if(isTypingInput){
+    if(e.key === 'Enter'){
+      e.preventDefault();
+      typeCheck();
+      return;
+    }
+    if(e.ctrlKey && e.key === 'ArrowRight'){
+      e.preventDefault();
+      typeNext(true);
+      return;
+    }
+    if(e.ctrlKey && e.key === 'ArrowLeft'){
+      e.preventDefault();
+      typePrev();
+      return;
+    }
+    // 일반 ← →, Space, Backspace, Delete, Home, End는 브라우저 기본 입력 기능 유지
+    return;
+  }
+
+  // 입력박스 밖에서는 기존처럼 카드 이동 단축키 사용
+  if(e.key === 'Enter'){
+    e.preventDefault();
+    typeCheck();
+  }else if(e.key === 'ArrowRight'){
+    e.preventDefault();
+    typeNext(true);
+  }else if(e.key === 'ArrowLeft'){
+    e.preventDefault();
+    typePrev();
+  }
+});
+document.addEventListener('input', function(e){
+  if(e.target && e.target.id === 'type-input'){
+    e.target.classList.remove('ok','ng');
+  }
+});
+
 // ── QUIZ ──
 const ANS={
   q52_1:'①',q52_2:'⑤',q52_3:['③','⑤'],q52_4:'①',q52_5:'③',
@@ -849,85 +1007,6 @@ function shuffleAllOptions(){
     [...box.querySelectorAll('.mco')].forEach((o,i)=>{const n=o.querySelector('.onum'); if(n)n.textContent=NN[i];});
   });
 }
-
-
-// ── TYPING FLASHCARD MODE ──
-let typeDeck=[], typeIdx=0, typeSuccess=0;
-function typeBuildDeck(){
-  typeDeck=[...CH_IDX[curCh]];
-  typeIdx=0;
-  typeSuccess=0;
-  if(document.getElementById('pg-typing')?.classList.contains('on')) typeRender();
-}
-function typeClean(html){
-  const d=document.createElement('div');
-  d.innerHTML=html;
-  return d.innerHTML;
-}
-function typeAnswerOf(card){
-  return (card?.a||'').replace(/&lt;/g,'<').replace(/&gt;/g,'>').trim();
-}
-function typeNorm(v){
-  return (v||'').trim().replace(/\s+/g,' ').toLowerCase();
-}
-function typeUpdateDots(){
-  document.querySelectorAll('#type-counts .type-dot').forEach((d,i)=>d.classList.toggle('on',i<typeSuccess));
-}
-function typeRender(){
-  const main=document.getElementById('type-main'), done=document.getElementById('type-done');
-  if(!main||!done) return;
-  if(!typeDeck.length) typeBuildDeck();
-  if(typeIdx>=typeDeck.length){main.style.display='none';done.classList.add('on');return;}
-  main.style.display='block';done.classList.remove('on');
-  const card=CARDS[typeDeck[typeIdx]];
-  document.getElementById('type-chname').textContent=CH_NAMES[curCh];
-  document.getElementById('type-meta').textContent=`${typeIdx+1} / ${typeDeck.length} · ${card.ch2} · ${card.tag}`;
-  document.getElementById('type-q').innerHTML=typeClean(card.q);
-  const ans=typeAnswerOf(card);
-  const ansBox=document.getElementById('type-answer');
-  ansBox.textContent='정답: '+ans; ansBox.classList.remove('on');
-  const inp=document.getElementById('type-input');
-  inp.value=''; inp.classList.remove('ok','ng');
-  document.getElementById('type-toast').textContent=''; document.getElementById('type-toast').className='type-toast';
-  typeSuccess=0; typeUpdateDots();
-  document.getElementById('type-prog').style.width=Math.round(typeIdx/typeDeck.length*100)+'%';
-  setTimeout(()=>inp.focus(),30);
-}
-function typeCheck(){
-  if(typeIdx>=typeDeck.length) return;
-  const card=CARDS[typeDeck[typeIdx]], ans=typeAnswerOf(card);
-  const inp=document.getElementById('type-input'), toast=document.getElementById('type-toast');
-  if(typeNorm(inp.value)===typeNorm(ans)){
-    typeSuccess++; inp.classList.add('ok'); inp.classList.remove('ng');
-    toast.textContent=`좋아! ${typeSuccess}/5 성공 ✨`; toast.className='type-toast good';
-    typeUpdateDots(); inp.value='';
-    if(typeSuccess>=5){
-      toast.textContent='5번 성공! 다음 카드로 넘어가요 🚀';
-      setTimeout(()=>typeNext(false),450);
-    }
-  }else{
-    inp.classList.add('ng'); inp.classList.remove('ok');
-    toast.textContent='한 글자라도 다르면 다시! 정답보기로 확인 가능해요 💪'; toast.className='type-toast bad';
-  }
-}
-function typeNext(manual){
-  if(typeIdx<typeDeck.length){typeIdx++; typeSuccess=0; typeRender();}
-}
-function typePrev(){
-  if(typeIdx>0){typeIdx--; typeSuccess=0; typeRender();}
-}
-function typeRestart(){typeBuildDeck(); typeRender();}
-function typeShuffle(){typeDeck.sort(()=>Math.random()-.5); typeIdx=0; typeSuccess=0; typeRender();}
-function typeShowAnswer(){document.getElementById('type-answer')?.classList.add('on'); document.getElementById('type-input')?.focus();}
-document.addEventListener('keydown',e=>{
-  if(!document.getElementById('pg-typing')?.classList.contains('on')) return;
-  if(e.key==='Enter'){e.preventDefault(); typeCheck();}
-  if(e.key==='ArrowRight') typeNext(true);
-  if(e.key==='ArrowLeft') typePrev();
-});
-document.addEventListener('input',e=>{
-  if(e.target?.id==='type-input') e.target.classList.remove('ok','ng');
-});
 
 prepareOptions();
 shuffleAllOptions();
