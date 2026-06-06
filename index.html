@@ -320,7 +320,7 @@ main{max-width:800px;margin:0 auto;padding:1.25rem 1rem 4rem}
     </div>
     <div class="type-nav">
       <button class="narr" onclick="typePrev()">← 이전</button>
-      <div class="type-help">Enter 채점 · ← → 이동 · 정답은 띄어쓰기만 조금 유연하게 보고, 글자는 그대로 봐요</div>
+      <div class="type-help">Enter 채점 · ← → 이동 · 입력박스에서는 ← → 커서 이동 · 정답은 화면 그대로 입력</div>
       <button class="narr" onclick="typeNext(true)">다음 →</button>
       <button class="qzb" onclick="typeShowAnswer()">정답보기</button>
     </div>
@@ -373,7 +373,7 @@ main{max-width:800px;margin:0 auto;padding:1.25rem 1rem 4rem}
 <div class="qcard"><div class="qnum">5.1—(21)</div><div class="qtext">중첩 클래스가 static이 아니면 반드시 외부 클래스의 객체를 통해서만 중첩 클래스의 <span class="bwrap"><input class="bi" data-answer="객체" placeholder="?"></span>를 생성할 수 있다.</div></div>
 <div class="qcard"><div class="qnum">5.1—(22)</div><div class="qtext">정적 중첩 클래스 내에는 <span class="bwrap"><input class="bi" data-answer="정적" placeholder="?"></span> 변수를 가질 수 있다.</div></div>
 <div class="qcard"><div class="qnum">5.1—(23)</div><div class="qtext">메소드나 혼합문에서 정의한 중첩 클래스를 <span class="bwrap"><input class="bi" data-answer="지역 중첩 클래스" placeholder="?" style="width:140px"></span>라고 한다.</div></div>
-<div class="qcard"><div class="qnum">5.1—(24)</div><div class="qtext"><span class="bwrap"><input class="bi" data-answer="익명 클래스" placeholder="?" style="width:110px"></span>는 메소드나 혼합문에서 클래스 정의와 객체 생성을 함께 할 수 있는 클래스이다.</div></div>
+<div class="qcard"><div class="qnum">5.1—(24)</div><div class="qtext"><span class="bwrap"><input class="bi" data-answer="무명 클래스" placeholder="?" style="width:110px"></span>는 메소드나 혼합문에서 클래스 정의와 객체 생성을 함께 할 수 있는 클래스이다.</div></div>
 <div class="qcard"><div class="qnum">5.1—(25)</div><div class="qtext">구조체와 그에 따른 연산을 정의한 자료형을 <span class="bwrap"><input class="bi" data-answer="추상 자료형" placeholder="?" style="width:120px"></span>이라 부른다.</div></div>
 <div class="part-hd">5.2 객관식</div>
 <div class="qcard" id="q52_1"><div class="qnum">5.2—(1)</div><div class="qtext">클래스를 통하여 이룰 수 있는 객체 지향 개념은?</div><div class="mcopts"><label class="mco"><input type="radio" name="q52_1"><span class="onum">①</span><span class="otext">자료 추상화</span></label><label class="mco"><input type="radio" name="q52_1"><span class="onum">②</span><span class="otext">상속성</span></label><label class="mco"><input type="radio" name="q52_1"><span class="onum">③</span><span class="otext">다형성</span></label><label class="mco"><input type="radio" name="q52_1"><span class="onum">④</span><span class="otext">유지 보수성</span></label><label class="mco"><input type="radio" name="q52_1"><span class="onum">⑤</span><span class="otext">융통성</span></label></div><div class="qres"></div></div>
@@ -554,7 +554,7 @@ const CARDS=[
 {ch:0,tag:'빈칸',ch2:'5.1—(12~13)',q:'메소드 중복(오버로딩) 시 구별은 <span class="blank">　　</span>가 결정. main()의 반환형: <span class="blank">　　</span>. 속한 클래스 이름 = <span class="blank">　　</span>의 이름.',a:'컴파일러 / void / 소스 파일',ex:'오버로딩은 <strong>컴파일러</strong>가 결정(컴파일 타임). 오버라이딩은 런타임 결정. main = public static <strong>void</strong> main(String[] args), 파일명 = 클래스명!'},
 {ch:0,tag:'빈칸',ch2:'5.1—(14~15)',q:'변경값 반영 시 객체의 <span class="blank">　　</span>를 매개변수로 사용. 생성자 이름 = <span class="blank">　　</span> 이름, <span class="blank">　　</span> 없음, 주된 작업은 <span class="blank">　　</span>.',a:'참조 / 클래스 / 반환형 / 초기화',ex:'자바는 객체를 <strong>참조</strong>로 전달 → 메소드 내 변경이 외부에 반영. 생성자: 클래스명 동일, 반환형 없음, new 시 자동 호출, 필드 <strong>초기화</strong>가 주목적!'},
 {ch:0,tag:'빈칸',ch2:'5.1—(16~19)',q:'같은 클래스 내 다른 생성자 호출: <span class="blank">　　</span>. 객체 저장 장소: <span class="blank">　　</span>. 불필요한 객체 자동 회수: <span class="blank">　　</span>.',a:'this / 힙(heap) / 가비지 수집기',ex:'<strong>this()</strong>: 같은 클래스의 다른 생성자 호출(반드시 첫 줄). 객체는 모두 <strong>힙</strong>에 저장. <strong>가비지 컬렉터(GC)</strong>가 참조 없는 객체를 자동 제거!'},
-{ch:0,tag:'빈칸',ch2:'5.1—(20~25)',q:'클래스 내 정의된 클래스: <span class="blank">　　</span> or <span class="blank">　　</span>. 메소드 내 정의: <span class="blank">　　　　</span>. 이름없이 정의+생성: <span class="blank">　　</span>.',a:'중첩 클래스 / 내부 클래스 / 지역 중첩 클래스 / 익명 클래스',ex:'<strong>중첩(내부)</strong> 클래스: 클래스 안의 클래스. <strong>지역 중첩</strong>: 메소드 안. <strong>익명</strong>: 이름 없이 정의+생성 동시에! <code>new Runnable(){...}</code>'},
+{ch:0,tag:'빈칸',ch2:'5.1—(20~25)',q:'클래스 내 정의된 클래스: <span class="blank">　　</span> or <span class="blank">　　</span>. 메소드 내 정의: <span class="blank">　　　　</span>. 이름없이 정의+생성: <span class="blank">　　</span>.',a:'중첩 클래스 / 내부 클래스 / 지역 중첩 클래스 / 무명 클래스',ex:'<strong>중첩(내부)</strong> 클래스: 클래스 안의 클래스. <strong>지역 중첩</strong>: 메소드 안. <strong>무명 클래스</strong>: 이름 없이 정의+생성 동시에! <code>new Runnable(){...}</code>'},
 {ch:0,tag:'객관식',ch2:'5.2—(1)(2)',q:'클래스 → ? / 접근 수정자 → ?\n①자료추상화 ②상속성 ③다형성 ④재사용성 ⑤정보은닉화',a:'클래스→① 자료추상화 / 접근수정자→⑤ 정보은닉화',ex:'<strong>클래스</strong> = 자료 추상화(데이터+연산을 자료형처럼). <strong>접근 수정자(private 등)</strong> = 정보 은닉화(내부 구현 숨김)!'},
 {ch:0,tag:'객관식',ch2:'5.2—(3)(4)',q:'접근 지정어 아닌 것? / 필드 자격자는?\n③package ⑤final / ①volatile',a:'③package⑤final / ①volatile',ex:'접근 지정어 아닌 것: <strong>package</strong>(자바에 없음), <strong>final</strong>(변경불가 지정어). 필드 자격자: <strong>volatile</strong>만! synchronized/native/abstract는 메소드용.'},
 {ch:0,tag:'객관식',ch2:'5.2—(6)',q:'접근 수준 틀린 것은?\n② package로 선언된 필드는 서브클래스에서 인식된다.',a:'② package 선언은 존재하지 않음!',ex:'자바에 <strong>"package" 접근 지정어는 없다!</strong> 아무 지정어 없는 것이 "default(package-private)"이며, 다른 패키지의 서브클래스에서는 접근 불가.'},
@@ -834,7 +834,7 @@ document.addEventListener('input', function(e){
 
 // ── QUIZ ──
 const ANS={
-  q52_1:'①',q52_2:'⑤',q52_3:['③','⑤'],q52_4:'①',q52_5:'③',
+  q52_1:'①',q52_2:'⑤',q52_3:['③'],q52_4:'①',q52_5:'③',
   q52_6:'②',q52_7:'③',q52_8:['④','⑤'],q52_9:'⑤',q52_10:'①',
   q62_1:'②',q62_2:'②',q62_3:'⑤',q62_4:'③',q62_5:'④',
   q62_6:'④',q62_7:'①',q62_8:['②','④','⑤'],q62_9:'②',q62_10:'③',
